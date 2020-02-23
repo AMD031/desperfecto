@@ -1,0 +1,42 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-title>Tus Reportes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+   
+    <ion-item-sliding *ngFor="let desperfecto of listado">
+     <ion-item-options side="start" (click)="editDesperfecto(desperfecto)">
+       <ion-item-option color="primary">
+         <ion-icon slot="icon-only" name="create"></ion-icon>
+       </ion-item-option>
+     </ion-item-options>
+    
+     <ion-item >
+      <div>
+        <strong>Latitud </strong>{{desperfecto.latitud}}<br>
+       <strong>Longitud </strong> {{desperfecto.longitud}}<br>
+       <strong>fecha </strong> {{desperfecto.fecha}}<br>
+       <strong>descripción </strong> {{desperfecto.descripcion}}<br>
+
+     </div>
+     </ion-item>
+     
+     <ion-item-options side="end">
+       <ion-item-option color="danger" (click)="removeDesperfecto(desperfecto)">
+         <ion-icon slot="icon-only" name="trash"></ion-icon>
+       </ion-item-option>
+     </ion-item-options>
+   </ion-item-sliding>
+
+ </ion-list>
+
+ <ion-fab (click)="agregarDesperfecto()" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+ 
+ </ion-content>

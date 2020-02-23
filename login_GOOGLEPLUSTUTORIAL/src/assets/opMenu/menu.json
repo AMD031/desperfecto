@@ -1,0 +1,39 @@
+[ 
+    
+{
+    "icon" : "camera",
+    "name" : "Filtrar: Todos los reportes",
+    "redirectTo" : "",
+    "clic" :""
+
+},
+{
+    "icon" : "camera",
+    "name" : "Filtrar: Mis reportes",
+    "redirectTo" : "",
+    "clic" :" "
+
+},
+{
+    "icon" : "search",
+    "name" : "Buscar",
+    "redirectTo" : "",
+    "clic" :"clicBuscar()"
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

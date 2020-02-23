@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Reportes</ion-title>
+    <ion-searchbar #input showCancelButton="focus" debounce="500" (ionChange)="buscarPorNombreOemail($event) " placeholder="buscar por fecha" color="secondary"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-list>
+    <ion-item  *ngFor="let desperfecto of listado">
+     <div>
+      <strong>Latitud </strong>{{desperfecto.latitud}}<br>
+      <strong>Longitud </strong> {{desperfecto.longitud}}<br>
+      <strong>fecha </strong> {{desperfecto.fecha}}<br>
+      <strong>descripción </strong> {{desperfecto.descripcion}}<br>
+    </div>
+    </ion-item>
+</ion-list>
+
+</ion-content>

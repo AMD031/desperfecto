@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{this.mode}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="cerrar()">
+        <ion-icon  name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <ion-input type="hidden" formControlName="id_desperfecto"></ion-input>
+    <ion-input type="hidden" formControlName="id_usuario_fk"></ion-input>
+    
+    <ion-item lines="full">
+      <ion-label position="floating">Latitud</ion-label>
+      <ion-input disabled="true" type="text" formControlName="latitud" ></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Longitud</ion-label>
+      <ion-input disabled="true" type="text" formControlName="longitud" ></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Foto</ion-label>
+      <ion-input  type="text" formControlName="foto" ></ion-input>
+    </ion-item>
+
+
+    <ion-item lines="full">
+      <ion-label position="floating">Fecha</ion-label>
+      <ion-input disabled="true" type="text" formControlName="fecha" ></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Descripcion</ion-label>
+      <ion-input type="text" formControlName="descripcion" ></ion-input>
+    </ion-item>
+    
+    
+   <img [src]="this.fuego" alt="">
+
+    <ion-row>
+      <ion-col>
+        <ion-button [disabled]="!this.form.valid" type="submit" color="primary" expand="block">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+  <span class="error ion-padding" *ngIf="this.errorControl.descripcion.status=='INVALID'" color="danger">
+    {{this.errorControlDescription}}
+  </span>
+
+
+  
+</ion-content>

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!--<ion-buttons slot="start">
+      <ion-menu-button color="primary" menu="first"> </ion-menu-button>
+    </ion-buttons>-->
+    <ion-title>
+      Mapa
+    </ion-title>
+    <ion-searchbar #input showCancelButton="focus" debounce="500" (ionChange)="buscaDesperfectoPorFecha($event) " placeholder="buscar por fecha"></ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <div id="mapId" style="width: 100%; height: 100%">
+  </div>
+</ion-content>
