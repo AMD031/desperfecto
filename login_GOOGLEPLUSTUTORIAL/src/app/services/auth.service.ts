@@ -3,17 +3,21 @@ import { User } from '../model/User';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Router } from '@angular/router';
+import { ReturnStatement } from '@angular/compiler';
+import { Usuario } from '../model/Usuario';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  private usuario:Usuario;
   private user: User;
 
   constructor(private local: NativeStorage,
     private google: GooglePlus,
-    private router:Router) { }
+    private router:Router,
+    private api:ApiService) { }
 
   public async checkSession(): Promise<void> {
     if (!this.user) {
@@ -56,6 +60,17 @@ export class AuthService {
             }
             this.user=user;
             this.saveSession(user);
+            //-------------------
+            if(user){
+              this.usuario ={
+                email: this.user.email,
+                nombre_usuario: this.user.displayName,
+                url_imagen: this.user.imageUrl,
+               } 
+
+              this.api.createUsuario(this.usuario);
+            }
+            //-----------------
             resolve(true);
           }else{
             resolve(false);
@@ -70,4 +85,10 @@ export class AuthService {
     await this.saveSession();
     this.router.navigate(['login']);
   }
+
+
+  get devolverUsuario(){
+    return this.usuario;
+  }
+
 }

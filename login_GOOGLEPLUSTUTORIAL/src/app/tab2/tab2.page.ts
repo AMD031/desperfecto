@@ -46,8 +46,15 @@ export class Tab2Page {
   
  
 
-  ionViewDidEnter() { 
+  async ionViewDidEnter() { 
+    if(this.map){
+      await this.cargaTodos();
+      this.cargarMarcadores();
+    }
      this.leafletMap(); 
+
+    
+
     }
  
     async leafletMap() {
@@ -57,8 +64,9 @@ export class Tab2Page {
           attribution: '____',
     }).addTo(this.map);
 
-   await this.cargaTodos();
-   this.cargarMarcadores();
+    await this.cargaTodos();
+    this.cargarMarcadores();
+
 
    }
   }
@@ -67,7 +75,7 @@ export class Tab2Page {
     if(this.markerGroup){
       this.markerGroup.clearLayers();
     }
-    this.markerGroup = layerGroup(null).addTo(this.map);
+      this.markerGroup = layerGroup(null).addTo(this.map);
      let valor;
     for(const pos of this.listado){   
       if(pos.fecha && pos.fecha !==""){
@@ -75,8 +83,6 @@ export class Tab2Page {
       }else{
         valor = "Reporte";
       }
-
-
        marker([pos.latitud , pos.longitud])
        .addTo(this.markerGroup)
       .bindPopup(valor)
@@ -88,6 +94,7 @@ export class Tab2Page {
   }
 
   async cargaTodos  ():Promise<void>{
+    console.log("entra");
     await this.ui.presentLoading();
      try{ 
         this.listado = await this.api.getDesperfecto();
@@ -115,7 +122,6 @@ export class Tab2Page {
       })
       .catch(async err => await this.ui.showToast(err.error))
       .finally(async () => {
-       
       });
     } else {
       await this.cargaTodos();
@@ -123,9 +129,7 @@ export class Tab2Page {
     }
   }
 
-  /*ionViewWillLeave() {
-    this.map.remove();
-  }*/
+
 
 
 

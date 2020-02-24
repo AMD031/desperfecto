@@ -1,8 +1,8 @@
-import { User } from './../model/User';
 import { Desperfecto } from './../model/Desperfecto';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import {HTTP} from '@ionic-native/http/ngx';
+import { Usuario } from '../model/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -68,9 +68,12 @@ export class ApiService {
 
   
  }  
-
+ public buscarPorEmail(value: any): Promise<Usuario[] | null>  {
+  console.log("valor en la funcion "+value);
+  return this.getUsuario('usuarioPorEmail/' + value);
+}
   
-  public getUsuario(id?: number | string):Promise<User[] |null>{
+  public getUsuario(id?: number | string):Promise<Usuario[] |null>{
     return new Promise((resolve, reject)=>{
       let endpoint = environment.endpoint + environment.apiUsurio;
     
@@ -128,8 +131,8 @@ export class ApiService {
     });
   }
 
-  public createDesperfecto(desperfecto: Desperfecto): Promise<void> {
-    const endpoint = environment.endpoint + environment.apiDesperfecto+ environment.nuevoDesperfecto+1;
+  public createDesperfecto(desperfecto: Desperfecto, id:number): Promise<void> {
+    const endpoint = environment.endpoint + environment.apiDesperfecto+ environment.nuevoDesperfecto+id;
     return new Promise((resolve, reject) => {
       if (desperfecto) {
         this.http.setDataSerializer('json'); //send body as json, needed
@@ -141,6 +144,24 @@ export class ApiService {
           .catch(err => reject(err));
       } else {
         reject('No existe desperfecto');
+      }
+    });
+  }
+
+
+  public createUsuario(usuario: Usuario): Promise<void> {
+    const endpoint = environment.endpoint + environment.apiUsurio;
+    return new Promise((resolve, reject) => {
+      if (usuario) {
+        this.http.setDataSerializer('json'); //send body as json, needed
+        this.http
+          .post(endpoint, usuario, this.header)
+          .then(d => {
+            resolve();
+          })
+          .catch(err => reject(err));
+      } else {
+        reject('No se ha podido crear');
       }
     });
   }

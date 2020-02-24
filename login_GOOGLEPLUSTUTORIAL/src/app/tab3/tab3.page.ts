@@ -5,6 +5,8 @@ import { UiComponent } from './../common/ui/ui.component';
 import { ApiService } from './../services/api.service';
 import { CreaModalService } from './../services/crea-modal.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Usuario } from '../model/Usuario';
 
 @Component({
   selector: 'app-tab3',
@@ -13,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab3Page implements OnInit {
   listado:Array<Desperfecto>;
-  constructor(private creaModal : CreaModalService, private api:ApiService, private ui: UiComponent) { }
+  constructor(private creaModal : CreaModalService, private api:ApiService, private ui: UiComponent, private auth:AuthService) { }
 
   ionViewDidEnter(){
     this.cargaTodos();
@@ -33,8 +35,13 @@ export class Tab3Page implements OnInit {
    async cargaTodos  (){
     await this.ui.presentLoading();
      try{ 
-        this.listado = await this.api.buscarDesperfectoPorIdUsuario("1");
+      let usuario = await this.api.buscarPorEmail(this.auth.devolverUsuario.email);
+      console.log("tu: "+this.auth.devolverUsuario.email);
+      if( usuario[0].id_usuario ){
+        
+        this.listado = await this.api.buscarDesperfectoPorIdUsuario( <number>usuario[0].id_usuario);
         console.log(this.listado);
+      }
      }catch(err){
             await this.ui.showToast("Error al cargar el listado." + err.error);
      }
@@ -76,8 +83,12 @@ public async agregarDesperfecto() {
   try {
     if (desperfectoToBeUpdated.data) {
    
+      let usuario = await this.api.buscarPorEmail(this.auth.devolverUsuario.email);
       await this.ui.presentLoading();
-      await this.api.createDesperfecto(desperfectoToBeUpdated.data);
+      if( usuario[0].id_usuario ){
+        await this.api.createDesperfecto(desperfectoToBeUpdated.data, usuario[0].id_usuario );
+      }
+      
       await this.cargaTodos();
     }
   } catch (err) {
