@@ -6,7 +6,6 @@ import { ApiService } from './../services/api.service';
 import { CreaModalService } from './../services/crea-modal.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Usuario } from '../model/Usuario';
 
 @Component({
   selector: 'app-tab3',
@@ -88,7 +87,6 @@ public async agregarDesperfecto() {
       if( usuario[0].id_usuario ){
         await this.api.createDesperfecto(desperfectoToBeUpdated.data, usuario[0].id_usuario );
       }
-      
       await this.cargaTodos();
     }
   } catch (err) {

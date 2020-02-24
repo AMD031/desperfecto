@@ -43,7 +43,7 @@ export class UiComponent implements OnInit {
   public async showToast(msg: string) {
     const _toast = await this.toast.create({
       message: msg,
-      duration: 2000,
+      duration: 5000,
       color: 'danger'
     });
     await _toast.present();

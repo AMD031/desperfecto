@@ -17,7 +17,7 @@
 
     <ion-item lines="full">
       <ion-label position="floating">Descripcion</ion-label>
-      <ion-input type="text" formControlName="descripcion" ></ion-input>
+      <ion-textarea formControlName="descripcion"></ion-textarea>
     </ion-item>
 
     <ion-item lines="full">
@@ -35,7 +35,7 @@
       <ion-input disabled="true" type="text" formControlName="fecha" ></ion-input>
     </ion-item>
 
-   <img [src]="this.fuego" alt="">
+  <img *ngIf="this.obtenerfoto!=null"   [src]="this.covertir()" alt="">
 
     <ion-row>
       <ion-col>
@@ -50,5 +50,10 @@
   </span>
 
 
+<!---<ion-fab  (click)="hacerFoto()" vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
+    <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>-->
   
 </ion-content>

@@ -8,13 +8,15 @@ import { FormEditarPageRoutingModule } from './form-editar-routing.module';
 
 import { FormEditarPage } from './form-editar.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     FormEditarPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+  
   ],
   providers:[ReactiveFormsModule],
   declarations: [FormEditarPage]

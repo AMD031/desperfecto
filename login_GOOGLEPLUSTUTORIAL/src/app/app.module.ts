@@ -27,7 +27,7 @@ import { UiComponent } from './common/ui/ui.component';
 import { MenuComponent } from './common/menu/menu.component';
 import { BucarformPage } from './bucarform/bucarform.page';
 import {HTTP} from '@ionic-native/http/ngx';
-
+import { Camera } from '@ionic-native/camera/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -52,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
 
   providers: [
+    Camera,
     ApiService,
     HTTP,
     GooglePlus,

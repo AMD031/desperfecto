@@ -85,7 +85,8 @@ export class Tab2Page {
       }
        marker([pos.latitud , pos.longitud])
        .addTo(this.markerGroup)
-      .bindPopup(valor)
+      .bindPopup('<p><strong>'+valor +'<strong></p>'+
+                 '<p>'+pos.latitud +" "+ pos.longitud +'</p>')
       .openPopup();
   
     }
